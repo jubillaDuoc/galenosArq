@@ -1,0 +1,71 @@
+.fondo-texto {
+    background-color: #b1b1b1;
+    padding: 5px;
+    display: inline-block;
+    color: hsl(0, 0%, 11%);
+}
+
+.primary-button {
+    background-color: #16879E;
+    border-color: #204362;
+    color: #fafafa
+}
+
+.our-navbar {
+    background-color: #97E5DB;
+}
+
+.small-form {
+    background-color: #fff;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+}
+
+.darkback {
+    background-color: #212529;
+}
+
+.primaryback {
+    background-color: #dc3545;
+}
+
+.left-section {
+    width: 60%;
+    height: 90vh; /* altura de la pantalla completa */
+    float: left;
+}
+  
+.right-section {
+    background-color: #5c5c60;
+    width: 40%;
+    height: 90vh; /* altura de la pantalla completa */
+    float: right;
+}
+
+body {
+    min-height:100vh;
+}
+
+.titulo-admin {
+  max-width: 300px; /* Establece el ancho máximo deseado para la columna */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cuerpo-noticia {
+    font-size: 18px;
+    line-height: 178%;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    color: #13141D;
+    font-family: "FiraSans-Regular", Helvetica Neue, -apple-system, "system-ui", BlinkMacSystemFont, sans-serif;
+}
+
+.indicador-economico {
+    font-size: 18px;
+    margin: 10px;
+    margin-top: 5px;
+    color: #b1b1b1;
+    font-family: "FiraSans-Regular", Helvetica Neue, -apple-system, "system-ui", BlinkMacSystemFont, sans-serif;
+}

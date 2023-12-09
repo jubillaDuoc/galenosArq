@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cuerpo %}
+<div class="container">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">Atencion Marcada</h2>
+
+                <table class="table";>
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre Paciente</th>
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Medico Atencion</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Centro medico</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resultado-tabla">
+                    {% for horamedica in horasmedicas %}
+                    <tr>
+                      <td>{{ horamedica.nombre_paciente }}</td>
+                      <td>{{ horamedica.nombre_especialidad }}</td>
+                      <td>{{ horamedica.nombre_medico }}</td>
+                      <td>{{ horamedica.fecha }}</td>
+                      <td>{{ horamedica.horainicio }}</td>
+                      <td>{{ horamedica.nombre_centromedico }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="btn btn-secondary me-md-2" aria-current="page" href="/">Volver al Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

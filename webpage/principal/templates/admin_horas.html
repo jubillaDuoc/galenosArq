@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cabeceras%}
+{% endblock %}
+{% block cuerpo %}
+<div class="container">
+    <div class="container-fluid p-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <a href="admin_hhcentro" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <p class="card-text">Horas Centro Medico</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="admin_hhmedico" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <p class="card-text">Agregar Horas Medico</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="admin_minushhmedico" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <p class="card-text">Disociar Horas Medico</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>    
+
+{% endblock %}

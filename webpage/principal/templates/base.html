@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Galenos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Importamos los estilos de Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom-styles.css' %}">
+  <!-- <script type="text/javascript" src="{% static 'js/jquery.js' %}"> -->
+  {% block cabeceras%}
+  {% endblock %}
+</head>
+<body>
+  <!-- Barra navegadora -->
+  <header>
+    <nav class="our-navbar navbar navbar-expand-sm navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'image/logo.png' %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="categorias">Especialidades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="periodistas">Nuestro Equipo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="contacto">Sucursales</a>
+            </li>
+            {% if user.is_authenticated %}
+              {% if user.groups.all.0.name == 'Secretaria' %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Panel Secretario
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="admin_horas">Revisar Horas</a>
+                  </div>
+                </li>
+              {% endif %}
+              {% if user.groups.all.0.name == 'Cajero' %}
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="recepcion">Recepcion Paciente</a>
+                </li>
+              {% endif %}
+              {% if user.groups.all.0.name == 'Medico' or user.groups.all.0.name == 'Secretaria'%}
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="espera">Lista Espera</a>
+                </li>
+              {% endif %}
+            {% endif %}
+          </ul>
+        </div>
+        <div>
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="me-md-2 dropdown-toggle btn primary-button" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-current="page" aria-haspopup="true" aria-expanded="false">
+                {{user.first_name}} {{user.last_name}}
+              </a>
+              <div class="dropdown-menu" style="min-width: 5rem;" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="signout">Log Out</a>
+              </div>
+            </li>
+            {% else %}
+            <li class="nav-item"></li>
+              <a class="btn me-md-2 primary-button" aria-current="page" href="signin">Log In</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  {% block cuerpo%}
+  {% endblock %}
+  <!-- Footer -->
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <div class="container fixed-bottom">
+    <br><br><br>
+    <footer class="bg-dark text-center text-lg-start fixed-bottom">
+      <!-- Copyright -->
+      <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0);">
+        <p style="color: rgb(138, 138, 138);">© 2023 Copyright. Desarrollado por Hurub+.</p>
+      </div>
+    </footer>
+  </div>
+    <!-- Importamos los scripts de Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

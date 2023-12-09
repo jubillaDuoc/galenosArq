@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cuerpo %}
+<div class="container">
+    <div class="container-fluid p-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <a href="reserva" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <p class="card-text">RESERVA TU HORA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="anulacion" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <p class="card-text">ANULA TU HORA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>    
+
+{% endblock %}

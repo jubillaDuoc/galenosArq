@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cabeceras%}
+<script src="{% static 'js/registro_pago.js' %}"></script>
+{% endblock %}
+{% block cuerpo %}
+<div class="container">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% if flagInitial %}
+
+                <h2 class="mb-4">Ingrese el mail del paciente</h2>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="mailpaciente" class="form-label">Correo Electrónico</label>
+                        <div class="input-group">
+                            <input class="form-control" type="email" name="mailpaciente" id="mailpaciente"
+                                placeholder="Ingrese el correo electrónico" required="true"
+                                pattern="[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                title="Ingrese una dirección de correo electrónico válida">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </form>
+
+                {% elif flagMailPaciente %}
+
+                <h2 class="mb-4">Ingrese el rut del paciente</h2>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="rutpaciente" class="form-label">Rut del paciente</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="rutpaciente" id="rutpaciente"
+                                placeholder="Ingrese el rut (09XXXXXX) sin guion"
+                                required="True"
+                                pattern="[0-9]{8}"
+                                title="Debe ingresar un número de 8 dígitos">
+                        </div>
+                    </div>
+                    <input type="hidden" name="mailpaciente" id="mailpaciente" value="{{ mailpaciente }}">
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </form>
+
+                {% elif flagRutPaciente %}
+
+                <h2 class="mb-4">Seleccione la hora a pagar</h2>
+
+                <table class="table";>
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre Paciente</th>
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Medico Atencion</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Centro medico</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resultado-tabla">
+                    {% for horamedica in horasmedicas %}
+                    <tr>
+                      <td>{{ horamedica.nombre_paciente }}</td>
+                      <td>{{ horamedica.nombre_especialidad }}</td>
+                      <td>{{ horamedica.nombre_medico }}</td>
+                      <td>{{ horamedica.fecha }}</td>
+                      <td>{{ horamedica.horainicio }}</td>
+                      <td>{{ horamedica.nombre_centromedico }}</td>
+                      <td><a href="javascript:void(0);" data-href="pago_paciente?idCita={{ horamedica.id_cita }}" class="confirmar-pago_paciente">Registrar Pago</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="btn btn-secondary me-md-2" aria-current="page" href="/">Volver al Home</a>
+                {% elif flagPagoOK %}
+                
+                <h2 class="mb-4">Se ha registrado el pago</h2>
+                <br><br><br><br>
+                <a class="btn btn-secondary me-md-2" aria-current="page" href="/">Volver al Home</a>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

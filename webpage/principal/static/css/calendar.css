@@ -1,0 +1,65 @@
+/* Estilos para la lista de horas */
+#hour-list {
+    background-color: #5C5C60; /* Gris oscuro para contraste */
+    color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#hour-list .hour {
+    background-color: #97E5DB; /* Color suave para las horas */
+    padding: 8px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#hour-list .hour:hover {
+    background-color: #16879E; /* Color de resalte al pasar el mouse */
+}
+
+.selected {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#hour-list-container {
+    max-height: 400px; /* Ajusta esto para que coincida con la altura de tu calendario */
+    overflow-y: auto; /* Esto añade una barra de desplazamiento vertical si es necesario */
+    border: 1px solid #ccc; /* Opcional: Añade un borde para definir claramente el área */
+    padding: 10px; /* Opcional: Añade algo de espacio interno para una mejor estética */
+    margin-top: 20px; /* Espacio entre la configuración y la lista de horas */
+}
+
+#hour-list li {
+    cursor: pointer; /* Cambia el cursor para indicar que los elementos son seleccionables */
+    padding: 5px; /* Espacio alrededor de cada hora para una mejor legibilidad */
+    border-bottom: 1px solid #eee; /* Opcional: Línea separadora para cada hora */
+}
+
+#hour-list li.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+#day-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#day-list li {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+#day-list li.selected {
+    background-color: #007bff;
+    color: white;
+}

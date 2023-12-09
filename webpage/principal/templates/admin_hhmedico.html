@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cabeceras%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+{% block cuerpo %}
+{% csrf_token %}
+<div class="container">
+{% if flagInitial %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <h2 class="mb-4">Seleccione un medico</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <select name="medico" id="medico" class="form-control">
+                            {% for medico in medicos %}
+                                <option value="{{ medico.id_medico }}">{{ medico.nombre_medico }}</option>
+                            {% endfor %}
+                            </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% elif flagHoras %}
+<div class="container-fluid p-4">
+    <div class="row">
+        <h2>horas disponibles:</h2>
+        <div id="day-list-container">
+            <ul id="day-list">
+                {% for hora in horas %}
+                <li data-idhora="{{ hora.id_hora_centromedico }}">{{ hora.fecha }} {{ hora.horainicio }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h2>Configuración:</h2>
+        <div>
+            <label>
+                <input type="checkbox" id="addToCalendar"> Agregar horas al calendario
+            </label>
+            <input type="hidden" id="medicoId" value="{{ medico }}">
+        </div>
+        <div>
+            <button id="acceptButton" disabled>Aceptar</button>
+        </div>
+    </div>
+</div>
+{% endif %}
+</div>
+
+
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+<script src="{% static 'js/horas_medico.js' %}"></script> <!-- Enlace al archivo JS externo -->
+
+{% endblock %}

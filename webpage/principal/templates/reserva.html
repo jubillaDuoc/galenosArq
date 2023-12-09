@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cabeceras%}
+{% endblock %}
+{% block cuerpo %}
+<div class="container">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% if flagPaciente %}
+                <h2 class="mb-4">Su hora a sido confirmada</h2>
+                <table class="table table-vertical";>
+                    <tbody id="resultado-tabla">
+                      <tr>
+                        <th scope="row">Nombre del paciente</th>
+                        <td>{{ nombre_paciente }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Correo del paciente</th>
+                        <td>{{ email_paciente }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Nombre del Medico</th>
+                        <td>{{ nombre_medico }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Especialidad</th>
+                        <td>{{ nombre_especialidad }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Fecha</th>
+                        <td>{{ fecha }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hora de Inicio</th>
+                        <td>{{ horainicio }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hora de Termino</th>
+                        <td>{{ horafin }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Sucursal</th>
+                        <td>{{ nombre_centromedico }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ubicacion</th>
+                        <td>{{ direccion_centromedico }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a class="btn btn-secondary me-md-2" aria-current="page" href="/">Volver al Home</a>
+                {% else %}
+                <h2 class="mb-4">Formulario de reserva de horas medicas</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% if flagEspecialidad %}
+                    <div class="mb-3">
+                        <label for="medico" class="form-label">Seleccione el medico</label>
+                        <select name="medico" id="medico" class="form-control">
+                        {% for medico in medicos %}
+                            <option value="{{ medico.id_medico }}">{{ medico.nombre_medico }}</option>
+                        {% endfor %}
+                        </select>
+                        <input type="hidden" name="especialidad" id="especialidad" value="{{ idEspecilidadSel }}">
+                    </div>
+                    {% else %}
+
+                    {% if flagMedico %}
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Seleccione la hora deseada</label>
+                        <select name="hora" id="hora" class="form-control">
+                        {% for hora in horas %}
+                            <option value="{{ hora.id_med_disp }}">Fecha: {{ hora.fecha }} - Hora inicio: {{ hora.horainicio }} - Hora fin: {{ hora.horafin }}</option>
+                        {% endfor %}
+                        </select>
+                        <input type="hidden" name="medico" id="medico" value="{{ idMedicoSel }}">
+                        <input type="hidden" name="especialidad" id="especialidad" value="{{ idEspecilidadSel }}">
+                    </div>
+
+                    {% else %}
+
+                    {% if flagHora %}
+                    <h4 class="">Ingrese sus datos personales</h4>
+
+                    <div class="mb-3">
+                        <label for="nombrepaciente" class="form-label">Nombre</label>
+                        <div class="input-group">
+                        <input class="form-control" type="text" name="nombrepaciente" id="nombrepaciente"
+                        placeholder="Ingrese su nombre" required="True">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <div class="input-group">
+                        <input class="form-control" type="text" name="apellido" id="apellido"
+                        placeholder="Ingrese su apellido" required="True">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <div class="input-group">
+                            <input class="form-control" type="email" name="email" id="email"
+                                placeholder="Ingrese su correo electrónico" required="true"
+                                pattern="[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                title="Ingrese una dirección de correo electrónico válida">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="numtel" class="form-label">Número telefónico</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="numtel" id="numtel"
+                                placeholder="Ingrese su número de celular (9XXXXXXXX)"
+                                required="True"
+                                pattern="[0-9]{9}"
+                                title="Debe ingresar un número de 9 dígitos">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rutpac" class="form-label">Rut del paciente</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="rutpac" id="rutpac"
+                                placeholder="Ingrese su rut (09XXXXXX) sin guion"
+                                required="True"
+                                pattern="[0-9]{8}"
+                                title="Debe ingresar un número de 8 dígitos">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="hora" id="hora" value="{{ idHoraSel }}">
+
+                    {% else %}
+
+                    <div class="mb-3">
+                        <label for="especialidad" class="form-label">Seleccione la especialidad</label>
+                        <select name="especialidad" id="especialidad" class="form-control">
+                        {% for especialidad in especialidades %}
+                            <option value="{{ especialidad.id_especialidad }}">{{ especialidad.nombre_especialidad }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+
+                    {% endif %} {% endif %}  {% endif %}
+
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
